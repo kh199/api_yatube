@@ -3,17 +3,11 @@ from rest_framework import serializers
 
 
 class PostSerializer(serializers.ModelSerializer):
-    group = serializers.SlugRelatedField(
-        required=False,
-        queryset=Group.objects.all(),
-        slug_field='slug'
-    )
-    comments = serializers.StringRelatedField(many=True, read_only=True)
     author = serializers.ReadOnlyField(source='author.username')
 
     class Meta:
         fields = ('id', 'text', 'pub_date',
-                  'author', 'image', 'group', 'comments'
+                  'author', 'image', 'group',
                   )
         model = Post
 
